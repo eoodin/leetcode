@@ -42,4 +42,19 @@ public class PalindromicNumberTest {
     public void test3() {
         assertEquals("abcba", solution.longest("abcba"));
     }
+
+    @Test
+    public void test4() {
+        assertEquals("bb", solution.longest("bb"));
+    }
+
+    @Test
+    public void test5() {
+        String s = "jglknendplocymmvwtoxvebkekzfdhykknufqdkntnqvgfbahsljkobhbxkvyictzkqjqydczuxjkgecdyhixdttxfqmgksrk" +
+                "yvopwprsgoszftuhawflzjyuyrujrxluhzjvbflxgcovilthvuihzttzithnsqbdxtafxrfrblulsakrahulwthhbjcslceewxfx" +
+                "tavljpimaqqlcbrdgtgjryjytgxljxtravwdlnrrauxplempnbfeusgtqzjtzshwieutxdytlrrqvyemlyzolhbkzhyfyttevqnf" +
+                "vmpqjngcnazmaagwihxrhmcibyfkccyrqwnzlzqeuenhwlzhbxqxerfifzncimwqsfatudjihtumrtjtggzleovihifxufvwqeim" +
+                "bxvzlxwcsknksogsbwwdlwulnetdysvsfkonggeedtshxqkgbhoscjgpiel";
+        assertEquals("sknks", solution.longest(s));
+    }
 }
