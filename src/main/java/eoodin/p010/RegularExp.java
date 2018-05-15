@@ -1,13 +1,70 @@
 package eoodin.p010;
 
 public class RegularExp {
+
+    class Token {
+
+    }
+
+    class FixToken extends Token {
+        private final char[] patterns;
+        private final int start;
+        private final int end;
+
+        FixToken(char[] patterns, int start, int end) {
+            this.patterns = patterns;
+            this.start = start;
+            this.end = end;
+        }
+
+        public String toString() {
+            return String.valueOf(patterns, start, end - start + 1);
+        }
+    }
+
+    class VaryToken extends Token {
+        private char ch;
+
+        VaryToken(char ch) {
+
+            this.ch = ch;
+        }
+
+        public String toString() {
+            return String.valueOf(ch);
+        }
+    }
+
     public boolean isMatch(String s, String p) {
         char[] chars = s.toCharArray();
         char[] pattern = p.toCharArray();
-        int pi = 0, si = 0;
-        System.out.println("Text:    " + s);
-        System.out.println("Pattern: " + p);
-        return regMatch(chars, pattern, pi, si);
+        Token[] tokens = buildToken(pattern);
+
+        return false;
+    }
+
+    private Token[] buildToken(char[] p) {
+        Token[] tokens = new Token[p.length];
+        int fpStart = 0;
+        int tii = 0;
+        for (int i = 0; i < p.length - 1; i++) {
+            if (p[i + 1] == '*') {
+                if(fpStart < i) {
+                    tokens[tii++] = new FixToken(p, fpStart, i - 1);
+                }
+                tokens[tii++] = new VaryToken(p[i]);
+                i++;
+                fpStart = i + 1;
+            }
+        }
+        if (fpStart < p.length) {
+            tokens[tii++] = new FixToken(p, fpStart, p.length - 1);
+        }
+
+        Token[] trimmed = new Token[tii];
+        System.arraycopy(tokens, 0, trimmed, 0, tii);
+
+        return trimmed;
     }
 
     private boolean regMatch(char[] target, char[] pattern, int pi, int si) {
