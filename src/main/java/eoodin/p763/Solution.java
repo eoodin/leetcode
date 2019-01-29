@@ -14,7 +14,7 @@ public class Solution {
             int si = pos;
             do {
                 int t = chars.length - 1;
-                for (; t > si; --t) {
+                for (; t > li || (li <= si && t > si); --t) {
                     if(chars[si] == chars[t]) {
                         break;
                     }
